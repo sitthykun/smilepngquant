@@ -87,8 +87,9 @@ class SmilePNGQuant:
 				# no error
 				if process.returncode == 0:
 
-					# remove old
+					# remove old if it's true
 					if removeFile:
+						# no regret
 						os.remove(filename)
 
 				#
