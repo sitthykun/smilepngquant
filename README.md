@@ -35,6 +35,7 @@ from SmilePNGQuant import SmilePNGQuant
 smile = SmilePNGQuant()
 
 # test a filename
+# quality value starts 20 to 100, and it's integer
 smile.compress(
   filename  = '/home/thyda/Download/kara.png'
   , quality = 80
