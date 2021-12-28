@@ -27,6 +27,26 @@ pngquant --version
 ```
 $ 2.17.0 (September 2021)
 
+# Start to code
+```
+from SmilePNGQuant import SmilePNGQuant
+
+# initialize
+smile = SmilePNGQuant()
+
+# test a filename
+smile.compress(
+  filename  = '/home/thyda/Download/kara.png'
+  , quality = 80
+)
+
+# verify before use
+if smile.isError():
+  print(f'Everything is okay, the file name is: {smile.getFilename()}')
+
+else:
+  print(f'{smile.getErrorMessage()}')
+```
 
 It is available on **PyPi** store via https://pypi.org/project/SmilePngquant/ \
 To Support my work, please donate me via <a class="bmc-button" target="_blank" href="https://www.buymeacoffee.com/sitthykun"><img src="https://cdn.buymeacoffee.com/buttons/bmc-new-btn-logo.svg" alt="Buy me a Pizza"><span style="margin-left:5px;font-size:28px !important;">Buy me a Coffee</span></a>
