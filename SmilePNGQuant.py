@@ -39,7 +39,7 @@ class SmilePNGQuant:
 		self.__errorMessage	= ''
 		self.__isError		= False
 
-	def covert(self, filename: str, quality: int= 50, removeFile: bool= True) -> str:
+	def compress(self, filename: str, quality: int= 50, removeFile: bool= True) -> None:
 		"""
 
 		:param filename:
@@ -48,64 +48,54 @@ class SmilePNGQuant:
 		:return:
 		"""
 		try:
-			#
-			self.__setErrorNo()
-
 			# validate extension first
 			if (os.path.basename(filename).split(".", 1)[1]).lower() != self.__extension:
 				# error
 				self.__setError('Wrong extension')
 
-				# blank
-				return ''
+			else:
+				# set default
+				self.__setErrorNo()
+				self.__quality	= quality
+				# set new filename
+				self.__filename	= f'{os.path.dirname(filename)}{os.path.basename(filename).split(".", 1)[0]}.{self.__extension}'
 
-			# init
-			self.__quality	= quality
-			# set new filename
-			self.__filename	= f'{os.path.dirname(filename)}{os.path.basename(filename).split(".", 1)[0]}.{self.__extension}'
+				# validate and set default
+				if self.__quality > 100 or self.__quality < 20:
+					self.__quality	= 50
 
-			# validate and set default
-			if self.__quality > 100 or self.__quality < 0:
-				self.__quality	= 50
+				# command
+				# you have to install pngquant first
+				cmd			= [
+					# that is the default location
+					'/usr/local/bin/pngquant'
+					# it's able to set in range 60 to 80
+					# but below, it sets fix
+					, f'--quality={self.__quality}-{self.__quality}'
+					, filename
+					, '--output'
+					, self.__filename
+				]
 
-			# command
-			# you have to install pngquant first
-			cmd			= [
-				# that is the default location
-				'/usr/local/bin/pngquant'
-				# it's able to set in range 60 to 80
-				# but below, it sets fix
-				, f'--quality={self.__quality}-{self.__quality}'
-				, filename
-				, '--output'
-				, self.__filename
-			]
+				# run a process
+				process		= subprocess.run(
+					cmd
+					, stdout= subprocess.PIPE
+					, stderr= subprocess.PIPE
+				)
 
-			# run a process
-			process		= subprocess.run(
-				cmd
-				, stdout= subprocess.PIPE
-				, stderr= subprocess.PIPE
-			)
+				# no error
+				if process.returncode == 0:
 
-			# no error
-			if process.returncode == 0:
+					# remove old
+					if removeFile:
+						os.remove(filename)
 
-				# remove old
-				if removeFile:
-					os.remove(filename)
-
-				# return the new filename with png extension
-				return self.__filename
-
-			#
-			self.__setError(str(process.stderr))
-			# the current file that cannot
-			return filename
+				#
+				self.__setError(str(process.stderr))
 
 		except Exception as e:
 			self.__setError(str(e))
-			return ''
 
 	def getErrorMessage(self) -> str:
 		"""
