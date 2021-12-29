@@ -1,7 +1,7 @@
 """
 Author: masakokh
 Year: 2021
-Version: 1.0.0
+Version: 1.0.1
 Package: project
 """
 import os
@@ -21,6 +21,7 @@ class SmilePNGQuant:
 		self.__filename		= ''
 		self.__isError		= False
 		self.__quality		= 0
+		self.__pngquantPath	= '/usr/local/bin/pngquant'
 
 	def __setError(self, message: str) -> None:
 		"""
@@ -68,7 +69,7 @@ class SmilePNGQuant:
 				# you have to install pngquant first
 				cmd			= [
 					# that is the default location
-					'/usr/local/bin/pngquant'
+					self.__pngquantPath
 					# it's able to set in range 60 to 80
 					# but below, it sets fix
 					, f'--quality={self.__quality}-{self.__quality}'
@@ -132,3 +133,11 @@ class SmilePNGQuant:
 		:return:
 		"""
 		return self.__isError
+	
+	def setPngQuant(self, path: str) -> None:
+		"""
+		
+		:param path: 
+		:return: 
+		"""
+		self.__pngquantPath	= path
