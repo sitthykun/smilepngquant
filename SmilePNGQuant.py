@@ -133,11 +133,12 @@ class SmilePNGQuant:
 		:return:
 		"""
 		return self.__isError
-	
+
 	def setPngQuant(self, path: str) -> None:
 		"""
-		
-		:param path: 
-		:return: 
+
+		:param path:
+		:return:
 		"""
 		self.__pngquantPath	= path
+
