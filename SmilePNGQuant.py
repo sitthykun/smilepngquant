@@ -29,7 +29,7 @@ class SmilePNGQuant:
 		:param message:
 		:return:
 		"""
-		self.__errorMessage	= message
+		self.__errorMessage	= f'{message}'
 		self.__isError		= True
 
 	def __setErrorNo(self) -> None:
@@ -40,30 +40,49 @@ class SmilePNGQuant:
 		self.__errorMessage	= ''
 		self.__isError		= False
 
-	def compress(self, filename: str, quality: int= 50, removeFile: bool= True) -> None:
+	def compress(self, filename: str, quality: int= 50, removeFile: bool= True, newFilename: str= '_new') -> None:
 		"""
 
 		:param filename:
 		:param quality:
 		:param removeFile:
+		:param newFilename:
 		:return:
 		"""
 		try:
 			# validate extension first
-			if (os.path.basename(filename).split(".", 1)[1]).lower() != self.__extension:
+			if not os.path.exists(filename):
 				# error
+				self.__setError(f'File not found: {filename}')
+
+			# double-check
+			elif (os.path.basename(filename).split('.', 1)[1]).lower() != self.__extension:
+				#
 				self.__setError('Wrong extension')
 
+			#
 			else:
 				# set default
 				self.__setErrorNo()
 				self.__quality	= quality
-				# set new filename
-				self.__filename	= f'{os.path.dirname(filename)}{os.path.basename(filename).split(".", 1)[0]}.{self.__extension}'
+
+				# need removing
+				if removeFile:
+					# set new filename and keep it
+					self.__filename = f'{os.path.dirname(filename)}/{newFilename}.{self.__extension}'
+
+				else:
+					# override current file
+					self.__filename = f'{filename}'
 
 				# validate and set default
-				if self.__quality > 100 or self.__quality < 20:
-					self.__quality	= 50
+				# maximum
+				if self.__quality > 100:
+					self.__quality	= 100
+
+				# minimum is 10
+				elif self.__quality < 10:
+					self.__quality	= 10
 
 				# command
 				# you have to install pngquant first
@@ -87,14 +106,14 @@ class SmilePNGQuant:
 
 				# no error
 				if process.returncode == 0:
-
 					# remove old if it's true
 					if removeFile:
 						# no regret
 						os.remove(filename)
 
-				#
-				self.__setError(str(process.stderr))
+				else:
+					# got the new error message
+					self.__setError(str(process.stderr))
 
 		except Exception as e:
 			self.__setError(str(e))
@@ -134,6 +153,14 @@ class SmilePNGQuant:
 		"""
 		return self.__isError
 
+	# def setFilename(self, filename: str) -> None:
+	# 	"""
+	#
+	# 	:param filename:
+	# 	:return:
+	# 	"""
+	# 	self.__filename		= filename
+
 	def setPngQuant(self, path: str) -> None:
 		"""
 
@@ -141,4 +168,3 @@ class SmilePNGQuant:
 		:return:
 		"""
 		self.__pngquantPath	= path
-
