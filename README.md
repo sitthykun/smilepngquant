@@ -29,10 +29,10 @@ $ 2.17.0 (September 2021)
 
 # Start to code
 ```
-from SmilePNGQuant import SmilePNGQuant
+from smilepngquant.PNGQuant import PNGQuant
 
 # initialize
-smile = SmilePNGQuant()
+smile = PNGQuant()
 
 # test a filename
 # quality value starts 20 to 100, and it's integer
