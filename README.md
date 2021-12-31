@@ -49,7 +49,7 @@ else:
   print(f'{smile.getErrorMessage()}')
 ```
 
-It is available on **PyPi** store via https://pypi.org/project/SmilePngquant/ \
+It is also available on https://pypi.org/project/smilepngquant \
 To Support my work, please donate me via <a class="bmc-button" target="_blank" href="https://www.buymeacoffee.com/sitthykun"><img src="https://cdn.buymeacoffee.com/buttons/bmc-new-btn-logo.svg" alt="Buy me a Pizza"><span style="margin-left:5px;font-size:28px !important;">Buy me a Coffee</span></a>
 
 
