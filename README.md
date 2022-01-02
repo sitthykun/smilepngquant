@@ -58,14 +58,37 @@ set a new copy name
 
 Both can set any value, or None, or one of them.
 
+Ex 1
 ```
 smile.compress(
-  filename  = '/home/thyda/Download/kara.png'
-  , quality = 80
+  filename      = '/home/thyda/Download/kara.png'
+  , quality     = 80
   # move to new directory
-  , dirname = '/home/thyda/Document/'
+  , dirname     = '/home/thyda/Document/'
+  , newFilename = 'jojo'
 )
 ```
+
+Ex 2
+```
+smile.compress(
+  filename      = '/home/thyda/Download/kara.png'
+  , quality     = 80
+  # move to new directory
+  , dirname     = '/home/thyda/Document/'
+)
+```
+
+Ex 3 
+```
+smile.compress(
+  filename      = '/home/thyda/Download/kara.png'
+  , quality     = 80
+  # move to new directory
+  , newFilename = 'jojo'
+)
+```
+
 
 It is also available on https://pypi.org/project/smilepngquant \
 To Support my work, please donate me via <a class="bmc-button" target="_blank" href="https://www.buymeacoffee.com/sitthykun"><img src="https://cdn.buymeacoffee.com/buttons/bmc-new-btn-logo.svg" alt="Buy me a Pizza"><span style="margin-left:5px;font-size:28px !important;">Buy me a Coffee</span></a>
