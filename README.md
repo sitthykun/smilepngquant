@@ -44,12 +44,15 @@ smile.setPngQuant(path= '/home/thyda/my_app')
 
 # test a filename
 # quality value starts 20 to 100, and it's integer
+```
 smile.compress(
   filename  = '/home/thyda/Download/kara.png'
   , quality = 80
 )
+```
 
 # verify before use
+```
 if smile.isError():
   print(f'Everything is okay, the file name is: {smile.getFilename()}')
 
@@ -65,6 +68,8 @@ set coy to a new directory for the new file
 set a new copy name
 
 Both can set any value, or None, or one of them.
+
+Let check the example:
 
 Ex 1
 ```
