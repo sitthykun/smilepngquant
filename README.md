@@ -33,6 +33,14 @@ from smilepngquant.PNGQuant import PNGQuant
 
 # initialize
 smile = PNGQuant()
+```
+*** by default the application located in /usr/local/bin/pngquant
+
+*** it's able to set to another location via
+```
+smile.setPngQuant(path= '/home/thyda/my_app')
+```
+
 
 # test a filename
 # quality value starts 20 to 100, and it's integer
