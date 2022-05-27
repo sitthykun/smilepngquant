@@ -1,7 +1,7 @@
 """
 Author: masakokh
 Year: 2021
-Version: 1.0.2
+Version: 1.1.0
 Package: project
 """
 import os
@@ -29,13 +29,17 @@ class PNGQuant:
 
 		:return:
 		"""
+		# the default path in ubuntu
+		defaultPath	= '/usr/local/bin/pngquant'
+
+		#
 		if self.__pngquantPath and os.path.isfile(self.__pngquantPath):
 			return True
 
-		elif os.path.isfile('/usr/local/bin/pngquant'):
+		elif os.path.isfile(defaultPath):
 			# set default
 			# but nonsense to set here, but, it saves some process
-			self.__pngquantPath	= '/usr/local/bin/pngquant'
+			self.setPngQuant(path= defaultPath)
 			return True
 
 		else:

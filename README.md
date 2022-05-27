@@ -1,6 +1,10 @@
 # SmilePngquant
 That is a bridge of pngquant for python3
 
+What's new 1.1.0
+- add default pngquant sdk path in constructor
+- verify pngquant sdk path
+
 # Download
 ### Find package
 - https://pkgs.org/download/pngquant
@@ -32,13 +36,15 @@ $ 2.17.0 (September 2021)
 from smilepngquant.PNGQuant import PNGQuant
 
 # initialize
-smile = PNGQuant()
+smile    = PNGQuant()
+or
+smile    = PNGQuant('/usr/local/bin/pngquant')
 ```
 *** by default the application located in /usr/local/bin/pngquant
 
 *** it's able to set to another location via
 ```
-smile.setPngQuant(path= '/home/thyda/my_app')
+smile.setPngQuant(path= '/home/winny/pngquant')
 ```
 
 
