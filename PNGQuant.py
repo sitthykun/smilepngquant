@@ -6,6 +6,8 @@ Package: project
 """
 import os
 import subprocess
+# internal
+from .Error import Error
 
 
 class PNGQuant:
@@ -17,12 +19,13 @@ class PNGQuant:
 
 		:param pngquantPath:
 		"""
-		self.__errorMessage	= ''
+		# private
 		self.__extension	= 'png'
 		self.__filename		= ''
-		self.__isError		= False
 		self.__quality		= 0
 		self.__pngquantPath	= pngquantPath
+		# public
+		self.error			= Error()
 
 	def __foundPngQuantSDKPath(self) -> bool:
 		"""
@@ -32,7 +35,7 @@ class PNGQuant:
 		# the default path in ubuntu
 		defaultPath	= '/usr/local/bin/pngquant'
 
-		#
+		# verify
 		if self.__pngquantPath and os.path.isfile(self.__pngquantPath):
 			return True
 
@@ -44,25 +47,8 @@ class PNGQuant:
 
 		else:
 			# set error
-			self.__setError('The pngquant sdk path\'s not found.')
+			self.error.setError('The pngquant sdk path\'s not found.')
 			return False
-
-	def __setError(self, message: str) -> None:
-		"""
-
-		:param message:
-		:return:
-		"""
-		self.__errorMessage	= f'{message}'
-		self.__isError		= True
-
-	def __setErrorNo(self) -> None:
-		"""
-
-		:return:
-		"""
-		self.__errorMessage	= ''
-		self.__isError		= False
 
 	def compress(self, filename: str, quality: int= 50, newFilename: str= '', dirname: str= '') -> None:
 		"""
@@ -84,17 +70,17 @@ class PNGQuant:
 				# validate extension first
 				if not os.path.exists(filename):
 					# error
-					self.__setError(f'File not found: {filename}')
+					self.error.setError(f'File not found: {filename}')
 
 				# double-check
 				elif (os.path.basename(filename).split('.', 1)[1]).lower() != self.__extension:
 					#
-					self.__setError('Wrong extension')
+					self.error.setError('Wrong extension')
 
 				# found file
 				else:
 					# set default
-					self.__setErrorNo()
+					self.error.setErrorNo()
 					self.__quality	= quality
 
 					# need removing
@@ -186,18 +172,11 @@ class PNGQuant:
 								, f'{os.path.dirname(self.__filename)}/{os.path.basename(tempFileMove)}'
 							)
 						# got the new error message
-						self.__setError(str(process.stderr))
+						self.error.setError(str(process.stderr))
 
 			except Exception as e:
-				self.__setError(str(e))
+				self.error.setError(str(e))
 				print(str(e))
-
-	def getErrorMessage(self) -> str:
-		"""
-
-		:return:
-		"""
-		return self.__errorMessage
 
 	def getFilename(self) -> str:
 		"""
@@ -219,13 +198,6 @@ class PNGQuant:
 		:return:
 		"""
 		return f'{os.path.dirname(self.__filename)}/'
-
-	def isError(self) -> bool:
-		"""
-
-		:return:
-		"""
-		return self.__isError
 
 	def setPngQuant(self, path: str) -> None:
 		"""
