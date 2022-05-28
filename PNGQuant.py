@@ -7,7 +7,7 @@ Package: project
 import os
 import subprocess
 # internal
-from .Error import Error
+from Error import Error
 
 
 class PNGQuant:

@@ -1,7 +1,7 @@
 # SmilePngquant
 That is a bridge of pngquant for python3
 
-What's new 1.1.0
+What's new 1.1.1
 - add default pngquant sdk path in constructor
 - verify pngquant sdk path
 
