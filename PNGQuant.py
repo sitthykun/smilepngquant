@@ -1,7 +1,7 @@
 """
 Author: masakokh
 Year: 2021
-Version: 1.1.0
+Version: 1.1.1
 Package: project
 """
 import os
