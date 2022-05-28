@@ -52,7 +52,7 @@ smile.setPngQuant(path= '/home/winny/pngquant')
 # quality value starts 20 to 100, and it's integer
 ```
 smile.compress(
-  filename  = '/home/thyda/Download/kara.png'
+  filename  = '/home/winny/Download/kara.png'
   , quality = 80
 )
 ```
@@ -80,10 +80,10 @@ Let check the example:
 Ex 1
 ```
 smile.compress(
-  filename      = '/home/thyda/Download/kara.png'
+  filename      = '/home/winny/Download/kara.png'
   , quality     = 80
   # move to new directory
-  , dirname     = '/home/thyda/Document/'
+  , dirname     = '/home/winny/Document/'
   , newFilename = 'jojo'
 )
 ```
@@ -91,17 +91,17 @@ smile.compress(
 Ex 2
 ```
 smile.compress(
-  filename      = '/home/thyda/Download/kara.png'
+  filename      = '/home/winny/Download/kara.png'
   , quality     = 80
   # move to new directory
-  , dirname     = '/home/thyda/Document/'
+  , dirname     = '/home/winny/Document/'
 )
 ```
 
 Ex 3 
 ```
 smile.compress(
-  filename      = '/home/thyda/Download/kara.png'
+  filename      = '/home/winny/Download/kara.png'
   , quality     = 80
   # move to new directory
   , newFilename = 'jojo'
