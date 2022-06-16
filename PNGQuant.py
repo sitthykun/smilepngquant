@@ -1,7 +1,7 @@
 """
 Author: masakokh
 Year: 2021
-Version: 1.1.1
+Version: 1.1.2
 Package: project
 """
 import os
@@ -197,7 +197,7 @@ class PNGQuant:
 
 		:return:
 		"""
-		return f'{os.path.dirname(self.__filename)}/'
+		return os.path.join(os.path.dirname(self.__filename), '')
 
 	def setPngQuant(self, path: str) -> None:
 		"""
