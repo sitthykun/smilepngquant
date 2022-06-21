@@ -1,7 +1,7 @@
 """
 Author: masakokh
 Year: 2021
-Version: 1.1.2
+Version: 1.1.3
 Package: project
 """
 import os
@@ -50,13 +50,15 @@ class PNGQuant:
 			self.error.setError('The pngquant sdk path\'s not found.')
 			return False
 
-	def compress(self, filename: str, quality: int= 50, newFilename: str= '', dirname: str= '') -> None:
+	def compress(self, filename: str, quality: int= 50, newFilename: str= '', dirname: str= '', minimumQuality: int= 10, maximumQuality: int= 100) -> None:
 		"""
 
 		:param filename:
 		:param quality:
 		:param newFilename:
 		:param dirname:
+		:param minimumQuality:
+		:param maximumQuality:
 		:return:
 		"""
 		# verify sdk path
@@ -97,8 +99,9 @@ class PNGQuant:
 						if os.path.dirname(dirname) == os.path.dirname(filename):
 							# name with extension
 							self.__filename = f'{os.path.dirname(dirname)}/{os.path.basename(filename)}_new.{self.__extension}'
-							# remove the exist
+							# remove the exists
 							needRemove      = True
+
 							# move the exist file
 							if os.path.exists(self.__filename):
 								# move to temp
@@ -120,12 +123,12 @@ class PNGQuant:
 
 					# validate and set default
 					# maximum
-					if self.__quality > 100:
-						self.__quality	= 100
+					if self.__quality > maximumQuality:
+						self.__quality	= minimumQuality
 
 					# minimum is 10
-					elif self.__quality < 10:
-						self.__quality	= 10
+					elif self.__quality < minimumQuality:
+						self.__quality	= minimumQuality
 
 					# command
 					# you have to install pngquant first
