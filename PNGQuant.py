@@ -1,29 +1,31 @@
 """
 Author: masakokh
 Year: 2021
-Version: 1.1.1
+Version: 1.2.0
 Package: project
 """
 import os
 import subprocess
 # internal
-from Error import Error
+from .Error import Error
 
 
 class PNGQuant:
 	"""
 
 	"""
-	def __init__(self, pngquantPath: str= ''):
+	def __init__(self, pngquantPath: str= '', temporaryPath: str= ''):
 		"""
 
 		:param pngquantPath:
+		:param temporaryPath:
 		"""
 		# private
 		self.__extension	= 'png'
 		self.__filename		= ''
 		self.__quality		= 0
 		self.__pngquantPath	= pngquantPath
+		self.__tempPath     = temporaryPath or '/tmp/'
 		# public
 		self.error			= Error()
 
@@ -102,7 +104,7 @@ class PNGQuant:
 							# move the exist file
 							if os.path.exists(self.__filename):
 								# move to temp
-								tempFileMove    = f'/tmp/{os.path.basename(self.__filename)}'
+								tempFileMove    = f'{self.__tempPath}{os.path.basename(self.__filename)}'
 								#
 								os.rename(
 									self.__filename
@@ -116,7 +118,7 @@ class PNGQuant:
 					else:
 						# override current file
 						needRemove      = True
-						self.__filename = f'/tmp/123456ABCDEF789_ukLepAeSeceSe3fsaEF_HnesieceS2_seq.{self.__extension}'
+						self.__filename = f'{self.__tempPath}123456ABCDEF789_ukLepAeSeceSe3fsaEF_HnesieceS2_seq.{self.__extension}'
 
 					# validate and set default
 					# maximum
@@ -206,3 +208,11 @@ class PNGQuant:
 		:return:
 		"""
 		self.__pngquantPath	= path
+
+	def setTemporaryPath(self, path: str) -> None:
+		"""
+
+		:param path:
+		:return:
+		"""
+		self.__tempPath     = path
